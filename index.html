@@ -127,6 +127,31 @@
         </script>
       </div>
 
+      <div class="row">
+        <h2>Sequence</h2>
+        <div class="sequence"></div>
+        <pre>
+          $(function () {
+            var imagesequence = $(".controls").imagesequence({
+              src: { 'img/anim_a/anim_a.jpg', 'img/anim_b/anim_b.jpg' },
+              width: 1280,
+              height: 720,
+              sequence: true
+            });
+          });
+        </pre>
+        <script type="text/javascript">
+          $(function () {
+            var imageSeq = $(".sequence").imagesequence({
+              src: [ 'img/anim_a/anim_a.jpg', 'img/anim_b/anim_b.jpg' ],
+              width: 1280,
+              height: 720,
+              sequence: true
+            });
+          });
+        </script>
+      </div>
+
     </div>
 
 

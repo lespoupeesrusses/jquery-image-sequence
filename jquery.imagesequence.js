@@ -21,14 +21,28 @@ var ImageSequence = function (target, options) {
     this.step = -1;
   }
   this.shouldPlay = this.autoplay;
+  this.sequence = false;
+  if(options.sequence) {
+    this.sequence = true;
+  }
 
   var _this = this;
 
   this.init = function () {
-    _this.image.src = _this.src;
+    if(_this.sequence) {
+      _this.sequencer();
+    } else {
+      _this.image.src = _this.src;
+      _this.target.html(_this.image);
+    }
     _this.currentFrame = 0;
     _this.target.css('overflow','hidden');
-    _this.target.html(_this.image);
+  }
+
+  this.sequencer = function () {
+    $(_this.src).each(function (i) {
+      _this.target.append('<div class="image"><img src="' + _this.src[i] + '" alt="Sequencer image" /></div>');
+    });
   }
 
   this.run = function () {
