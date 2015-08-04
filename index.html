@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery Image Sequence</title>
+
+  </head>
+  <body>
+
+    <div class="wrapper">
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="jquery.imagesequence.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+
+      $(function () {
+
+        $(".wrapper").imagesequence({
+          src: 'anim_a.jpg',
+          width: 1280,
+          height: 720
+        });
+
+      });
+
+    </script>
+
+  </body>
+</html>
