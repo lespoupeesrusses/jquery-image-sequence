@@ -9,6 +9,9 @@ var ImageSequence = function (target, options) {
   this.controls = options.controls;
   this.image = new Image();
   this.step = 1;
+  if (options.rewind) {
+    this.step = -1;
+  }
 
   var _this = this;
 
@@ -17,21 +20,6 @@ var ImageSequence = function (target, options) {
     _this.currentFrame = 0;
     _this.target.css('overflow','hidden');
     _this.target.html(_this.image);
-    _this.displayControls();
-  }
-
-  this.displayControls = function () {
-    if(_this.controls == true) {
-      _this.target.append(
-        '<div class="play-btn">\
-          <a href="#" class="play">Play</a>\
-          <a href="#" class="rewind">Rewind</a>\
-         </div>'
-      );
-    }
-    $('.rewind').on('click', function () {
-      _this.rewind();
-    });
   }
 
   this.run = function () {
@@ -39,6 +27,15 @@ var ImageSequence = function (target, options) {
       _this.nextFrame();
       _this.run();
     }, 40);
+  }
+
+  this.play = function () {
+    console.log('playyy')
+    _this.step = 1;
+  }
+
+  this.pause = function () {
+    _this.step = 0;
   }
 
   this.rewind = function () {

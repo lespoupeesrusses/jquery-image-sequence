@@ -4,48 +4,126 @@
   <head>
     <meta charset="utf-8">
     <title>jQuery Image Sequence</title>
-    <style media="screen">
-      body {
-        background: #333;
-        margin: 0;
-        padding: 0;
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="jquery.imagesequence.js" charset="utf-8"></script>
+    <style type="text/css">
+      body{
+        background: #eee;
       }
-      .wrapper {
-        background: red;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-      }
-      .play-btn {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        z-index: 1;
+      .row{
+        margin: 20px auto;
       }
     </style>
   </head>
   <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Jquery Image Sequence</a>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
 
-    <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <h2>Basic usage</h2>    
+        <div class="basic-usage"></div>
+        <pre>
+          $(function () {
+            $(".basic-usage").imagesequence({
+              src: 'anim_a.jpg',
+              width: 1280,
+              height: 720
+            });
+          });
+        </pre>
+        <script type="text/javascript">
+          $(function () {
+            $(".basic-usage").imagesequence({
+              src: 'anim_a.jpg',
+              width: 1280,
+              height: 720
+            });
+          });
+        </script>
+      </div>
+
+      <div class="row">
+        <h2>Rewind</h2>    
+        <div class="rewind"></div>
+        <pre>
+          $(function () {
+            $(".rewind").imagesequence({
+              src: 'anim_a.jpg',
+              width: 1280,
+              height: 720,
+              rewind: true
+            });
+          });
+        </pre>
+        <script type="text/javascript">
+          $(function () {
+            $(".rewind").imagesequence({
+              src: 'anim_a.jpg',
+              width: 1280,
+              height: 720,
+              rewind: true
+            });
+          });
+        </script>
+      </div>
+
+      <div class="row">
+        <h2>Controls</h2>    
+        <div class="controls"></div>
+        <button class="play">Play</button>
+        <button class="pause">Pause</button>
+        <button class="rewind-button">Rewind</button>
+        <pre>
+          $(function () {
+            var imagesequence = $(".controls").imagesequence({
+              src: 'anim_a.jpg',
+              width: 1280,
+              height: 720
+            });
+            $('.play').on('click', function(){
+              imagesequence.play();
+            });
+            $('.pause').on('click', function(){
+              imagesequence.pause();
+            });
+            $('.rewind-button').on('click', function(){
+              imagesequence.rewind();
+            });
+          });
+        </pre>
+        <script type="text/javascript">
+          $(function () {
+            var imagesequence = $(".controls").imagesequence({
+              src: 'anim_a.jpg',
+              width: 1280,
+              height: 720
+            });
+            $('.play').on('click', function(){
+              imagesequence.play();
+            });
+            $('.pause').on('click', function(){
+              imagesequence.pause();
+            });
+            $('.rewind-button').on('click', function(){
+              imagesequence.rewind();
+            });
+          });
+        </script>
+      </div>
 
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="jquery.imagesequence.js" charset="utf-8"></script>
 
-    <script type="text/javascript">
-      $(function () {
-        var imagesequence = $(".wrapper").imagesequence({
-          src: 'anim_a.jpg',
-          width: 1280,
-          height: 720,
-          controls: true
-        });
-        imagesequence.rewind();
-      });
-    </script>
 
   </body>
 </html>
