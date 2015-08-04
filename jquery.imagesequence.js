@@ -9,6 +9,7 @@ var ImageSequence = function (target, options) {
   this.image = new Image();
   this.step = 1;
   this.loop = false;
+  this.running = false;
   if (options.loop) {
     this.loop = true;
   }
@@ -31,19 +32,23 @@ var ImageSequence = function (target, options) {
   }
 
   this.run = function () {
+    _this.running = true;
     setTimeout(function () {
       if(_this.shouldPlay){
         _this.nextFrame();
         _this.run();
       }
     }, 40);
+    // This needs to be replaced by a callback of sorts.
+    setTimeout(function () { _this.running = false }, 200);
   }
 
   this.play = function () {
     _this.step = 1;
-    console.log('step ', _this.step);
     _this.shouldPlay = true;
-    _this.run();
+    if(_this.running == false) {
+      _this.run();
+    }
   }
 
   this.pause = function () {
@@ -52,9 +57,10 @@ var ImageSequence = function (target, options) {
 
   this.rewind = function () {
     _this.step = -1;
-    console.log('step ', _this.step);
     _this.shouldPlay = true;
-    _this.run();
+    if(_this.running == false) {
+      _this.run();
+    }
   }
 
   this.drawCurrentFrame = function () {
@@ -80,7 +86,7 @@ var ImageSequence = function (target, options) {
     });
   }
 
-  /* 
+  /*
   Not necessarily 1, 2, 3...
   Can be 8, 7, 6...
   Could also be 0, 5, 10, 15...
@@ -114,8 +120,7 @@ var ImageSequence = function (target, options) {
   this.init();
   if(_this.autoplay){
     this.run();
-    console.log(this);
-  } 
+  }
 }
 
 if($) {
