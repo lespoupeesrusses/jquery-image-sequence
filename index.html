@@ -18,6 +18,12 @@
         top: 0;
         left: 0;
       }
+      .play-btn {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        z-index: 1;
+      }
     </style>
   </head>
   <body>
@@ -31,11 +37,13 @@
 
     <script type="text/javascript">
       $(function () {
-        $(".wrapper").imagesequence({
+        var imagesequence = $(".wrapper").imagesequence({
           src: 'anim_a.jpg',
           width: 1280,
-          height: 720
+          height: 720,
+          controls: true
         });
+        imagesequence.rewind();
       });
     </script>
 

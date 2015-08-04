@@ -1,11 +1,15 @@
 var ImageSequence = function (target, options) {
 
   target.imagesequence = this;
+
   this.target = target;
   this.src = options.src;
   this.width = options.width;
   this.height = options.height;
-  this.image = new Image;
+  this.controls = options.controls;
+  this.image = new Image();
+  this.step = 1;
+
   var _this = this;
 
   this.init = function () {
@@ -13,6 +17,21 @@ var ImageSequence = function (target, options) {
     _this.currentFrame = 0;
     _this.target.css('overflow','hidden');
     _this.target.html(_this.image);
+    _this.displayControls();
+  }
+
+  this.displayControls = function () {
+    if(_this.controls == true) {
+      _this.target.append(
+        '<div class="play-btn">\
+          <a href="#" class="play">Play</a>\
+          <a href="#" class="rewind">Rewind</a>\
+         </div>'
+      );
+    }
+    $('.rewind').on('click', function () {
+      _this.rewind();
+    });
   }
 
   this.run = function () {
@@ -20,6 +39,10 @@ var ImageSequence = function (target, options) {
       _this.nextFrame();
       _this.run();
     }, 40);
+  }
+
+  this.rewind = function () {
+    _this.step = -1;
   }
 
   this.drawCurrentFrame = function () {
@@ -35,7 +58,6 @@ var ImageSequence = function (target, options) {
 
     var x = (targetWidth - frameWidth) / 2;
     var y = (targetHeight - frameHeight) / 2;
-    y = 0;
 
     // Animation
     x -= _this.currentFrame * frameWidth;
@@ -47,16 +69,15 @@ var ImageSequence = function (target, options) {
   }
 
   this.nextFrame = function () {
-    if(_this.hasNextFrame()) {
-      _this.currentFrame++;
-    } else {
-      _this.currentFrame = 0;
+    _this.currentFrame = (_this.currentFrame + _this.step) % _this.countFrames();
+    if (_this.currentFrame < 0) {
+      _this.currentFrame += _this.countFrames();
     }
     _this.drawCurrentFrame();
   }
 
-  this.hasNextFrame = function () {
-    return (_this.currentFrame+1) * _this.width < _this.image.naturalWidth;
+  this.countFrames = function () {
+    return _this.image.naturalWidth / _this.width;
   }
 
   this.init();
@@ -65,6 +86,6 @@ var ImageSequence = function (target, options) {
 
 if($) {
   $.fn.imagesequence = function (options) {
-    new ImageSequence(this, options);
+    return new ImageSequence(this, options);
   }
 }
