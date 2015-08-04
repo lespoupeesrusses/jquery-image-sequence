@@ -41,6 +41,9 @@ var ImageSequence = function (target, options) {
 
   this.play = function () {
     _this.step = 1;
+    console.log('step ', _this.step);
+    _this.shouldPlay = true;
+    _this.run();
   }
 
   this.pause = function () {
@@ -49,6 +52,9 @@ var ImageSequence = function (target, options) {
 
   this.rewind = function () {
     _this.step = -1;
+    console.log('step ', _this.step);
+    _this.shouldPlay = true;
+    _this.run();
   }
 
   this.drawCurrentFrame = function () {
