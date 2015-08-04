@@ -6,12 +6,20 @@ var ImageSequence = function (target, options) {
   this.src = options.src;
   this.width = options.width;
   this.height = options.height;
-  this.controls = options.controls;
   this.image = new Image();
   this.step = 1;
+  this.loop = false;
+  if (options.loop) {
+    this.loop = true;
+  }
+  this.autoplay = false;
+  if (options.autoplay) {
+    this.autoplay = true;
+  }
   if (options.rewind) {
     this.step = -1;
   }
+  this.shouldPlay = this.autoplay;
 
   var _this = this;
 
@@ -24,13 +32,14 @@ var ImageSequence = function (target, options) {
 
   this.run = function () {
     setTimeout(function () {
-      _this.nextFrame();
-      _this.run();
+      if(_this.shouldPlay){
+        _this.nextFrame();
+        _this.run();
+      }
     }, 40);
   }
 
   this.play = function () {
-    console.log('playyy')
     _this.step = 1;
   }
 
@@ -65,10 +74,29 @@ var ImageSequence = function (target, options) {
     });
   }
 
+  /* 
+  Not necessarily 1, 2, 3...
+  Can be 8, 7, 6...
+  Could also be 0, 5, 10, 15...
+  */
   this.nextFrame = function () {
-    _this.currentFrame = (_this.currentFrame + _this.step) % _this.countFrames();
-    if (_this.currentFrame < 0) {
-      _this.currentFrame += _this.countFrames();
+    _this.currentFrame = _this.currentFrame + _this.step;
+    if (_this.currentFrame >= _this.countFrames()) {
+      // On the right, end of sequence
+      if (_this.loop) {
+        _this.currentFrame -= _this.countFrames();
+      } else {
+        _this.currentFrame = _this.countFrames() - 1;
+        _this.shouldPlay = false;
+      }
+    } else if (_this.currentFrame < 0) {
+      // On the left, beginning of sequence
+      if(_this.loop){
+        _this.currentFrame += _this.countFrames();
+      } else {
+        _this.currentFrame = 0;
+        _this.shouldPlay = false;
+      }
     }
     _this.drawCurrentFrame();
   }
@@ -78,7 +106,10 @@ var ImageSequence = function (target, options) {
   }
 
   this.init();
-  this.run();
+  if(_this.autoplay){
+    this.run();
+    console.log(this);
+  } 
 }
 
 if($) {
