@@ -1,5 +1,6 @@
 # jquery-image-sequence
 http://semiodesign.github.io/jquery-image-sequence/
+https://www.npmjs.com/package/jquery-image-sequence
 
 ## NB
 Importing a huge sequenced jpg or png probably won't work. The image generated on our side is more than 600.000 pixels long. Even Photoshop won't import it (max Photoshop size: 300.000px).
