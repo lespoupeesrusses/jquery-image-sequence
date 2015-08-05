@@ -41,7 +41,11 @@ var ImageSequence = function (target, options) {
 
   this.sequencer = function () {
     $(_this.src).each(function (i) {
-      _this.target.append('<div class="image"><img src="' + _this.src[i] + '" alt="Sequencer image" /></div>');
+      _this.target.append(
+        '<div class="image" style="z-index:' + i + '">\
+          <img src="' + _this.src[i] + '" alt="Sequencer image" />\
+         </div>'
+      );
     });
   }
 
