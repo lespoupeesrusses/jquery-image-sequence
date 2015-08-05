@@ -21,10 +21,6 @@ var ImageSequence = function (target, options) {
     this.step = -1;
   }
   this.shouldPlay = this.autoplay;
-  this.sequence = false;
-  if(options.sequence) {
-    this.sequence = true;
-  }
 
   var _this = this;
 
@@ -37,13 +33,7 @@ var ImageSequence = function (target, options) {
     }
     _this.currentFrame = 0;
     _this.target.css('overflow','hidden');
-  }
-
-  this.sequencer = function () {
-    $(_this.src).each(function (i) {
-      _this.target.append('<div class="image"><img src="' + _this.src[i] + '" alt="Sequencer image" /></div>');
-    });
-  }
+  };
 
   this.run = function () {
     _this.running = true;
@@ -54,28 +44,28 @@ var ImageSequence = function (target, options) {
       }
     }, 40);
     // This needs to be replaced by a callback of sorts.
-    setTimeout(function () { _this.running = false }, 200);
-  }
+    setTimeout(function () { _this.running = false; }, 200);
+  };
 
   this.play = function () {
     _this.step = 1;
     _this.shouldPlay = true;
-    if(_this.running == false) {
+    if(_this.running === false) {
       _this.run();
     }
-  }
+  };
 
   this.pause = function () {
     _this.step = 0;
-  }
+  };
 
   this.rewind = function () {
     _this.step = -1;
     _this.shouldPlay = true;
-    if(_this.running == false) {
+    if(_this.running === false) {
       _this.run();
     }
-  }
+  };
 
   this.drawCurrentFrame = function () {
     var targetWidth = _this.target.width();
@@ -98,7 +88,7 @@ var ImageSequence = function (target, options) {
       'transform' : "translate3d(" + x + "px,"+ y +"px,0) scale(" + scale + ", " + scale + ")",
       'transform-origin' : 'left top'
     });
-  }
+  };
 
   /*
   Not necessarily 1, 2, 3...
@@ -125,20 +115,20 @@ var ImageSequence = function (target, options) {
       }
     }
     _this.drawCurrentFrame();
-  }
+  };
 
   this.countFrames = function () {
     return _this.image.naturalWidth / _this.width;
-  }
+  };
 
   this.init();
   if(_this.autoplay){
     this.run();
   }
-}
+};
 
 if($) {
   $.fn.imagesequence = function (options) {
     return new ImageSequence(this, options);
-  }
+  };
 }
