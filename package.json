@@ -13,7 +13,9 @@
   "keywords": [
     "video",
     "sequence",
-    "fullscreen"
+    "fullscreen",
+    "jquery-plugin",
+    "ecosystem:jquery"
   ],
   "author": "Semio Design",
   "license": "ISC",
