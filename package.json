@@ -1,0 +1,24 @@
+{
+  "name": "jquery-image-sequence",
+  "version": "1.0.0",
+  "description": "Create a video like sequence that can cover an element",
+  "main": "jquery.imagesequence.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/semiodesign/jquery-image-sequence.git"
+  },
+  "keywords": [
+    "video",
+    "sequence",
+    "fullscreen"
+  ],
+  "author": "Semio Design",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/semiodesign/jquery-image-sequence/issues"
+  },
+  "homepage": "https://github.com/semiodesign/jquery-image-sequence#readme"
+}
