@@ -18,7 +18,7 @@
     "ecosystem:jquery"
   ],
   "author": "Semio Design",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/semiodesign/jquery-image-sequence/issues"
   },
