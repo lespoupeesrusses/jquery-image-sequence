@@ -100,9 +100,11 @@
       <div class="row">
         <h2>Controls</h2>
         <div class="controls"></div>
-        <button class="play">Play</button>
-        <button class="pause">Pause</button>
-        <button class="rewind-button">Rewind</button>
+        <div class="btn btn-group">
+          <button class="play btn btn-warning">Play</button>
+          <button class="pause btn btn-warning">Pause</button>
+          <button class="rewind-button btn btn-warning">Rewind</button>
+        </div>
         <pre>
           $(function () {
             var imagesequence = $(".controls").imagesequence({
@@ -177,6 +179,9 @@
       <div class="row">
         <h2>Image sequence</h2>
         <div class="example-image-sequence"></div>
+        <div class="btn btn-group">
+          <button class="play-sequence btn btn-warning">Play</button>
+        </div>
         <pre>
           $(function () {
             $(".example-image-sequence").imagesequence({
@@ -184,20 +189,23 @@
               extension: '.jpg',
               indexFrom: 1,
               indexTo: 122,
-              loop: true,
-              autoplay: true
+              loop: false,
+              autoplay: false
             });
           });
         </pre>
         <script type="text/javascript">
           $(function () {
-            var imageSequence1 = $(".example-image-sequence").imagesequence({
+            var imagesequence1 = $(".example-image-sequence").imagesequence({
               path: 'sequence',
               extension: '.jpg',
               indexFrom: 0,
               indexTo: 121,
-              loop: true,
-              autoplay: true
+              loop: false,
+              autoplay: false
+            });
+            $('.play-sequence').on('click', function(){
+              imagesequence1.play();
             });
           });
         </script>
